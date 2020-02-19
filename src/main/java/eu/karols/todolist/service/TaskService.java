@@ -5,7 +5,6 @@ import eu.karols.todolist.model.Task;
 import eu.karols.todolist.repository.TaskRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +24,7 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
-    public Task replaceTask(Task newTask, @PathVariable Long id) {
+    public Task replaceTask(Task newTask, Long id) {
         return taskRepository.findById(id)
                 .map(task -> {
                     task.setName(newTask.getName());
