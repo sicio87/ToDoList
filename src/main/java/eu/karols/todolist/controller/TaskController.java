@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/tasks")
 @RequiredArgsConstructor
@@ -30,12 +32,12 @@ public class TaskController {
     }
 
     @PostMapping("/add")
-    public Task saveTask(@RequestBody Task task) {
+    public Task saveTask(@RequestBody @Valid Task task) {
         return taskService.saveTask(task);
     }
 
     @PutMapping("/update/{id}")
-    public Task replaceTask(@RequestBody Task newTask, @PathVariable Long id) {
+    public Task replaceTask(@RequestBody @Valid Task newTask, @PathVariable Long id) {
         return taskService.replaceTask(newTask, id);
     }
 

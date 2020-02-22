@@ -6,6 +6,8 @@ import eu.karols.todolist.repository.TaskRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
 public class TaskService {
@@ -29,12 +31,13 @@ public class TaskService {
                 .map(task -> {
                     task.setName(newTask.getName());
                     task.setDescription(newTask.getDescription());
+                    task.setPriority(newTask.getPriority());
+                    task.setStatus(newTask.getStatus());
+                    task.setEditDate(LocalDateTime.now());
+                    task.setEndDate(newTask.getEndDate());
                     return taskRepository.save(task);
                 })
-                .orElseGet(() -> {
-                    newTask.setId(id);
-                    return taskRepository.save(newTask);
-                });
+                .orElseThrow(TaskNotFoundException::new);
     }
 
     public void deleteTask(Long id) {
