@@ -26,7 +26,7 @@ public class TaskController {
         return taskService.getTaskById(id);
     }
 
-    @GetMapping("/")
+    @GetMapping
     public Iterable<Task> getAllTasks() {
         return taskService.getAllTasks();
     }

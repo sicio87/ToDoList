@@ -5,20 +5,20 @@ services:
     volumes:
       - ./build/libs/todolist-0.0.1-SNAPSHOT.jar:/app/todolist-0.0.1-SNAPSHOT.jar
       - ./docker/wait-for-it.sh:/wait-for-it.sh
-    environment:
-      JAVA_TOOL_OPTIONS: "
-        -Deureka.client.enabled=false
-      "
-    ports:
-      - "9001:9001"
+#    environment:
+#      JAVA_TOOL_OPTIONS: "
+#        -Deureka.client.enabled=false
+#      "
+    expose:
+      - "9001"
     entrypoint: ["/wait-for-it.sh", "db:3306", "--", "java", "-jar", "/app/todolist-0.0.1-SNAPSHOT.jar"]
     networks:
       - my_network
   db:
     image: mysql:latest
     container_name: db
-    ports:
-      - "3306:3306"
+    expose:
+      - "3306"
     restart: always
     environment:
       MYSQL_USER: user
