@@ -10,7 +10,7 @@ services:
         -Dspring.profiles.active=dev
       "
     ports:
-      - "9001:9001"
+      - "10000:10000"
     entrypoint: ["/wait-for-it.sh", "db:3306", "--", "java", "-jar", "/app/todolist-0.0.1-SNAPSHOT.jar"]
     networks:
       - my_network
